@@ -1,58 +1,49 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+  <q-page class="flex flex-center">
+    <q-btn :loading="loading" @click="simulateProgress" round label="Button Label" size="10vh" icon="fas fa-stopwatch" style="color:#027BE3">
+          <span slot="loading">
+            <q-spinner-gears class="on-left"/>
+          </span>
+    </q-btn>
+  </q-page>
 </template>
 
+<style>
+</style>
+
 <script>
+
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  
+  data () {
+    return { loading: false }
+  },
+  methods: {
+    
+simulateProgress () {
+      // we set loading state
+      this.loading = true
+      var AudioMark = new Audio("./marks.mp3")
+      AudioMark.play()
+
+      // simulate a delay, like in
+      // waiting for an Ajax call
+      setTimeout(() => {
+        // delay is over, now we reset loading state
+        var AudioReady = new Audio("./ready.mp3")
+        AudioReady.play()
+        setTimeout(()=> {
+
+          var AudioGo = new Audio("./buzzer.mp3")
+          AudioGo.play()
+          this.loading = false
+        }, 3000)
+        // DON't forget to reset loading state
+        // otherwise the button will keep on
+        // being in "loading" state
+      }, 3000)
+    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
