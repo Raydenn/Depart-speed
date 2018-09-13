@@ -8,9 +8,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "createjs-soundjs": "^0.6.2",
+    "express": "^4.16.3",
+    "howler": "^2.0.15",
     "quasar-extras": "^2.0.4",
     "quasar-framework": "^0.17.0",
+    "surge": "^0.20.1",
     "vue": "^2.5.17"
   },
   "devDependencies": {

@@ -12,6 +12,7 @@
 </style>
 
 <script>
+import {Howl} from 'howler'
 
 export default {
   
@@ -23,21 +24,28 @@ export default {
 simulateProgress () {
       // we set loading state
       this.loading = true
-      var AudioMark = new Audio("./marks.mp3")
-      AudioMark.play()
+      var sound = new Howl({
+      src: ['./marks.mp3']
+      });
+      sound.play()
 
       // simulate a delay, like in
       // waiting for an Ajax call
       setTimeout(() => {
         // delay is over, now we reset loading state
-        var AudioReady = new Audio("./ready.mp3")
-        AudioReady.play()
+      sound = new Howl({
+      src: ['./ready.mp3']
+      });
+      sound.play()
+        var attente = Math.random() * (3 - 1) + 1;
         setTimeout(()=> {
 
-          var AudioGo = new Audio("./buzzer.mp3")
-          AudioGo.play()
+      sound = new Howl({
+      src: ['./buzzer.mp3']
+      });
+      sound.play()
           this.loading = false
-        }, 3000)
+        }, attente * 1000)
         // DON't forget to reset loading state
         // otherwise the button will keep on
         // being in "loading" state
